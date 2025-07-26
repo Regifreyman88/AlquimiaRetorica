@@ -1,0 +1,67 @@
+import streamlit as st
+
+st.set_page_config(
+    page_title="El Taller Alquímico",
+    page_icon="🧪"
+)
+
+# --- 1. La Propuesta (La Explicación) ---
+st.title("🧪 Taller Alquímico del Cerebro y el Lenguaje")
+
+# Mostramos la portada
+try:
+    st.image("Portada_Alquimia.jpg")
+except Exception:
+    st.warning("Asegúrate de haber subido la imagen 'Portada_Alquimia.jpg' al repositorio.")
+
+
+st.header("🎯 Propósito")
+st.write(
+    """
+    ¡Bienvenida, alquimista de la narrativa! En este taller explorarás cómo el lenguaje 
+    y la retórica modelan nuestra percepción del mundo.
+    
+    Tu misión es transformar un sesgo cognitivo y un tropo literario en una 
+    "pócima" simbólica, dándole vida a través de una imagen y una historia.
+    """
+)
+st.markdown("---")
+
+# --- 2. La Creación (Guía para el Alumno) ---
+st.header("PASO 1: Crea tu Pócima")
+st.info(
+    """
+    **Primero, reflexiona y elige tus ingredientes:**
+    1.  **Un Sesgo Cognitivo:** (Ej: Sesgo de confirmación, efecto halo, etc.)
+    2.  **Un Tropo Literario:** (Ej: Metáfora, ironía, sinécdoque, etc.)
+    
+    **Luego, ve a un generador de imágenes de IA** y crea una representación visual de tu "pócima".
+    
+    **Finalmente, descarga tu creación en formato .jpg o .png.**
+    """
+)
+st.link_button("Ir a un Generador de Imágenes (Bing/DALL-E 3)", "https://www.bing.com/images/create")
+
+st.markdown("---")
+
+# --- 3. La Contribución (El Botón para Subir) ---
+st.header("PASO 2: Comparte tu Creación")
+st.write("Una vez que tengas tu imagen, súbela aquí para añadirla a nuestro gabinete de maravillas.")
+
+imagen_subida = st.file_uploader(
+    "Sube aquí la imagen de tu pócima...", 
+    type=["jpg", "png", "jpeg"]
+)
+
+# --- 4. La Galería (Mostrar la Creación) ---
+if imagen_subida is not None:
+    st.success("¡Tu pócima ha sido añadida con éxito a esta sesión!")
+    
+    st.image(imagen_subida, caption="Tu creación alquímica.", use_column_width=True)
+    
+    nombre_pocima = st.text_input("Dale un nombre a tu pócima:")
+    ingredientes = st.text_area("Describe sus ingredientes (tu sesgo + tropo):")
+    
+    if st.button("Guardar Descripción"):
+        st.write(f"### {nombre_pocima}")
+        st.write(f"**Ingredientes:** {ingredientes}")
